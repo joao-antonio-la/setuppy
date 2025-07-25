@@ -115,13 +115,20 @@ class SetupRunner:
                     "error_message": None
                 }
             
-            else:
+            elif stderr:
                 if self.settings.error_handling_strategy == "stop":
                     self.stop()
                 return {
                     "success": False,
                     "output": None,
                     "error_message": stderr.strip()
+                }
+            
+            else:
+                return {
+                    "success": True,
+                    "output": None,
+                    "error_message": None
                 }
 
         except Exception as e:
